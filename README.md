@@ -1,5 +1,5 @@
 # filearranger
-python script to rearrange and organize a folder according to file types.
+## python3 script to rearrange and organize a folder according to file types.
 
 _This script is the love child of OCD and laziness, **it is not meant to be used beyond the scope
 of an individual's need to rearrange files on his or her personal computer.**_
