@@ -7,11 +7,19 @@ args.path = args.path.replace('~',os.getenv('HOME'))
 path = args.path
 os.chdir(path)
 cdir = os.listdir()
-fileindir = [obj.lower for obj in cdir if not os.path.isdir(os.path.join(path, obj))]
+fileindir = [obj for obj in cdir if not os.path.isdir(os.path.join(path, obj))]
+fileindir.remove(__file__)
 dirtype={
 "images":['.tif','.tiff','.gif','.jpeg','.jpg','.jif','.jfif','.jp2','.jpx','.j2k','.j2c','.fpx','.pcd','.png'],
-"videos":[".mp4",".avi",".mkv",".webm",".flv",'.ogv','.gifv','.mov','.wmv','.m4p','.mpg','.mpeg','.3gp']
+"videos":[".mp4",".avi",".mkv",".webm",".flv",'.ogv','.gifv','.mov','.wmv','.m4p','.mpg','.mpeg','.3gp'],
+"code":[".py",".c",".go"],
+"docs":[".docx",".doc",".pdf"]
 }
 for obj in list(dirtype.keys()):
     if obj not in cdir:
         os.mkdir(obj)
+for obj in fileindir:
+    for key in dirtype:
+        for i in dirtype[key]:
+            if i in obj.lower():
+                os.rename(os.path.join(path, obj),os.path.join(path,key,obj))
