@@ -14,7 +14,11 @@ dirtype={
 "videos":[".mp4",".avi",".mkv",".webm",".flv",'.ogv','.gifv','.mov','.wmv','.m4p','.mpg','.mpeg','.3gp'],
 "code":[".py",".c",".go"],
 "zips":[".zip",".tar",".rar",".7zip",".gz"],
-"docs":[".docx",".doc",".pdf"]
+"docs":[".docx",".doc",".pdf",".xls",".ods"],
+"torrents":['.torrent'],
+"music":[".mp3",".wmv"],
+"subtitles":[".srt"],
+"others":[]
 }
 for obj in list(dirtype.keys()):
     if obj not in cdir:
@@ -22,5 +26,8 @@ for obj in list(dirtype.keys()):
 for obj in fileindir:
     for key in dirtype:
         for i in dirtype[key]:
-            if i in obj.lower()[-4:]:
+            if i in obj.lower()[(-1*len(i)):]:
                 os.rename(os.path.join(path, obj),os.path.join(path,key,obj))
+                fileindir.remove(obj)
+for obj in fileindir:
+    os.rename(os.path.join(path, obj),os.path.join(path,"others",obj))
