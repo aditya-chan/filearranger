@@ -8,12 +8,17 @@ path = args.path
 os.chdir(path)
 cdir = os.listdir()
 fileindir = [obj for obj in cdir if not os.path.isdir(os.path.join(path, obj))]
-fileindir.remove(__file__)
+if __file__ in fileindir: fileindir.remove(__file__)
 dirtype={
 "images":['.tif','.tiff','.gif','.jpeg','.jpg','.jif','.jfif','.jp2','.jpx','.j2k','.j2c','.fpx','.pcd','.png'],
 "videos":[".mp4",".avi",".mkv",".webm",".flv",'.ogv','.gifv','.mov','.wmv','.m4p','.mpg','.mpeg','.3gp'],
 "code":[".py",".c",".go"],
-"docs":[".docx",".doc",".pdf"]
+"zips":[".zip",".tar",".rar",".7zip",".gz"],
+"docs":[".docx",".doc",".pdf",".xls",".ods"],
+"torrents":['.torrent'],
+"music":[".mp3",".wmv"],
+"subtitles":[".srt"],
+"others":[]
 }
 for obj in list(dirtype.keys()):
     if obj not in cdir:
@@ -21,5 +26,8 @@ for obj in list(dirtype.keys()):
 for obj in fileindir:
     for key in dirtype:
         for i in dirtype[key]:
-            if i in obj.lower():
+            if i in obj.lower()[(-1*len(i)):]:
                 os.rename(os.path.join(path, obj),os.path.join(path,key,obj))
+                fileindir.remove(obj)
+for obj in fileindir:
+    os.rename(os.path.join(path, obj),os.path.join(path,"others",obj))
