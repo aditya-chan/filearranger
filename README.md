@@ -4,7 +4,7 @@
 **Currently the script is in development but it is usable**
 
 _This script is the love child of OCD and laziness, **it is not meant to be used beyond the scope
-of an individual's need to rearrange files on his or her personal computer.**_
+of an individual's need to rearrange files on their personal computer.**_
 
 
 This script is a command line utility and uses python's os and argparse modules to arrange the following files.
